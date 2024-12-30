@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.3.0",
-    "@heroicons/react": "^2.2.0",
     "appwrite": "^16.1.0",
     "classname": "^0.0.0",
     "classnames": "^2.5.1",
