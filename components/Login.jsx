@@ -21,24 +21,18 @@ const Login = () => {
     }
     if (state.success) {
         toast.success('Logged in successfully!');
-
-        // تحديث حالة المصادقة وتفاصيل المستخدم
         setIsAuthenticated(true);
-
-        // جلب معلومات المستخدم بعد تسجيل الدخول
         const fetchUser = async () => {
             const { user } = await checkAuth();
-            setCurrentUser(user); // تحديث الحالة مباشرة
+            setCurrentUser(user);
         };
 
         fetchUser();
 
-        // إعادة التوجيه للصفحة الرئيسية
         router.push('/');
     }
 }, [state]);
 
-  console.log(state)
   const handleGoogleLogin = () => {
     toast.info("Google login coming soon!");
   };

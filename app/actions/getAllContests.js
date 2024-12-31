@@ -1,6 +1,6 @@
 'use server';
 import { createAdminClient } from '@/config/appwrite';
-
+import { revalidatePath } from 'next/cache';
 async function getAllContests() {
 
     const { databases } = await createAdminClient();
@@ -14,8 +14,9 @@ async function getAllContests() {
 
         return {
             success: true,
-            contests: response.documents, // قائمة بجميع المسابقات
+            contests: response.documents,
         };
+
     } catch (error) {
         console.error('Error fetching contests:', error);
         return {

@@ -25,14 +25,13 @@ const Signup = () => {
     }
   }, [state]);
 
-  // التحقق من الاسم أثناء الكتابة
   const handleNameChange = async (e) => {
     const inputName = e.target.value;
     setName(inputName);
-    setNameError('');  // إعادة تعيين الخطأ أثناء الكتابة
+    setNameError(''); 
     
     if (inputName) {
-      setIsChecking(true); // إظهار حالة التحميل
+      setIsChecking(true); 
 
       try {
         const errorMessage = await checkName(inputName);
@@ -40,13 +39,12 @@ const Signup = () => {
       } catch (error) {
         setNameError('Error occurred while checking the name');
       } finally {
-        setIsChecking(false); // إخفاء حالة التحميل بعد التحقق
+        setIsChecking(false); 
       }
     } else {
-      setNameError(''); // إزالة الخطأ إذا كان الاسم فارغًا
+      setNameError(''); 
     }
   };
-console.log(nameError)
   return (
     <div className="flex justify-center items-center bg-bg-color">
       <form action={formAction} className="rounded-lg max-w-sm w-full bg-sub-alt-color p-6">
@@ -67,9 +65,9 @@ console.log(nameError)
             <div className='absolute top-[39%] right-[11px]'>
             
         
-              {isChecking && <LoadingSpinner  isCheck={true} />} {/* عرض التحميل أثناء التحقق */}
-              {nameError==='not' && <FaUser className="text-red-500 text-sm" />} {/* الخطأ عند عدم توفر الاسم */}
-              {nameError==='sure' && !isChecking && <FaUser className='text-green-500 text-sm' />} {/* النجاح عندما يكون الاسم متاحًا */}
+              {isChecking && <LoadingSpinner  isCheck={true} />} 
+              {nameError==='not' && <FaUser className="text-red-500 text-sm" />} 
+              {nameError==='sure' && !isChecking && <FaUser className='text-green-500 text-sm' />} 
               
             </div>
           </div>

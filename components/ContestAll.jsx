@@ -13,9 +13,8 @@ import { useRouter } from "next/navigation";
 import LoadingSpinner from "./loading";
 
 const ContestAll = ({ id, duration, targetTime ,words}) => {
-  const [isWaiting, setIsWaiting] = useState(true); // حالة الانتظار قبل بدء المسابقة
+  const [isWaiting, setIsWaiting] = useState(true); 
   const {  typed, timeLeft, errors, state, restart, totalTyped } = useEngine({ time: duration });
-  console.log(words)
   const router=useRouter()
   useEffect(() => {
     if (targetTime > 0) {
@@ -49,12 +48,11 @@ const ContestAll = ({ id, duration, targetTime ,words}) => {
   if (isWaiting) {
     return (
       <div className="text-slate-50 grid place-items-center px-4 tracking-wider font-mono">
-        <h1 className="text-4xl">ssssssssssssss</h1>
+        <h1 className="text-4xl"></h1>
         
       </div>
     );
   }
-  console.log(timeLeft)
   if(timeLeft===0){
     return (
       <LoadingSpinner></LoadingSpinner>
@@ -82,7 +80,7 @@ const ContestAll = ({ id, duration, targetTime ,words}) => {
 };
 
 const WordsContainer = ({ children }) => (
-  <div className="relative text-3xl max-w-5xl leading-relaxed break-all mt-3">
+  <div className="relative text-3xl max-w-8xl leading-relaxed break-all mt-3">
     {children}
   </div>
 );

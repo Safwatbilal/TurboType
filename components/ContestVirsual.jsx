@@ -10,7 +10,6 @@ import useEngine from "@/hook/useEngine";
 
 const ContestVirsual = () => {
   const {words,  typed, timeLeft, errors, state, restart, totalTyped } = useEngine({ time: 30 });
-  console.log(words)
   return (
     <div className="text-slate-50 grid place-items-center px-4 tracking-wider font-mono">
       <CountdownTimer timeLeft={timeLeft} />
@@ -33,7 +32,7 @@ const ContestVirsual = () => {
 };
 
 const WordsContainer = ({ children }) => (
-  <div className="relative text-3xl max-w-7xl  leading-relaxed break-all mt-3">
+  <div className="relative text-3xl max-w-8xl  leading-relaxed break-all mt-3">
     {children}
   </div>
 );

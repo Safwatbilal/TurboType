@@ -7,7 +7,15 @@ const useTypings = (enabled) => {
     const totalTyped = useRef(0);
 
     const keydownHandler = useCallback(
-        ({ key, code }) => {
+        (e) => {
+            const { key, code } = e;
+
+            // تعطيل التمرير عند الضغط على مفتاح المسافة
+            if (key === " " || key === "Spacebar") {
+                e.preventDefault(); // منع التمرير
+            }
+
+            // عدم السماح بالإدخال إذا كانت الكتابة غير مفعلّة أو الكود غير مسموح
             if (!enabled || !isKeyboardCodeAllowed(code)) {
                 return;
             }
@@ -36,10 +44,11 @@ const useTypings = (enabled) => {
         totalTyped.current = 0;
     }, []);
 
-    // attach the keydown event listener to record keystrokes
+    // إضافة المستمع للحدث keydown
     useEffect(() => {
         window.addEventListener("keydown", keydownHandler);
-        // Remove event listeners on cleanup
+
+        // تنظيف الحدث عند مغادرة المكون
         return () => {
             window.removeEventListener("keydown", keydownHandler);
         };

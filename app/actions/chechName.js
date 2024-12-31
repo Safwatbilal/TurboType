@@ -1,6 +1,4 @@
 'use server';
-
-import { createAdminClient } from '@/config/appwrite';
 import { Users, Client } from 'node-appwrite';
 
 async function checkName(name) {

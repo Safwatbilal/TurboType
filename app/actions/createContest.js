@@ -58,8 +58,6 @@ async function createContest(previousState, formData) {
         }
     );
 
-    // Revalidate the layout to refresh data
-    revalidatePath('/', 'layout');
 
     return {
         success: true,

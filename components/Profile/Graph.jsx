@@ -1,20 +1,17 @@
 'use client';
 import React, { useState, useEffect } from "react";
-
 const Graph = ({ contest }) => {
-
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = ["Jan", "May", "Dec"];
   const monthPositions = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]; 
   const years = [new Date().getFullYear(), new Date().getFullYear() + 1, new Date().getFullYear() + 2, new Date().getFullYear() + 3, new Date().getFullYear() + 4];
   const contestDays = contest.documents.map((document) => {
     const contestDate = document?.contest_id?.created_at
       ? new Date(document.contest_id.created_at)
       : null;
-    return contestDate ? contestDate.toISOString().split("T")[0] : null; 
+    return contestDate ? contestDate.toISOString().split("T")[2] : null; 
   }).filter(date => date !== null); 
 
-  // الحالة لتخزين السنة المختارة
   const [selectedYear, setSelectedYear] = useState(years[0]); 
   const [data, setData] = useState([]);
   const generateContestData = (year) => {

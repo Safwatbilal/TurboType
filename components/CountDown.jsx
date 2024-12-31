@@ -26,16 +26,14 @@ export default function CountdownTimer({ targetTime }) {
         const interval = setInterval(updateTime, 1000);
         updateTime();
 
-        return () => clearInterval(interval); // Cleanup on unmount
+        return () => clearInterval(interval); 
     }, [targetTime]);
 
     if (typeof timeRemaining === "string") {
         return (
             <motion.div
                 className="text-center text-lg font-bold text-red-500"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
+            
             >
                 {timeRemaining}
             </motion.div>
@@ -44,22 +42,22 @@ export default function CountdownTimer({ targetTime }) {
 
     const { hours, minutes, seconds } = timeRemaining;
 
-    // Animation for sliding digits up
+
     const digitAnimation = {
-        initial: { y: 30, opacity: 0 },
+        initial: { y: 0, opacity: 0 },
         animate: { y: 0, opacity: 1 },
-        exit: { y: -30, opacity: 0 },
-        transition: { duration: 0.4 },
+        exit: { y: -10, opacity: 0 },
+       
     };
 
-    // Helper function to format numbers
+
     const formatNumber = (value) => (value < 10 ? `0${value}` : value);
 
     const renderDigit = (value, label) => (
         <div className="flex flex-col items-center">
             <AnimatePresence mode="wait">
                 <motion.div
-                    key={value} // Triggers animation on value change
+                    key={value} 
                     className="text-3xl font-bold"
                     initial="initial"
                     animate="animate"
