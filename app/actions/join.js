@@ -2,13 +2,13 @@
 import { createAdminClient } from '@/config/appwrite';
 import checkAuth from './checkAuth';
 import { Query } from 'node-appwrite';
-async function safwat({ contestId }) {
+async function join({ contestId }) {
     const { databases } = await createAdminClient();
     const { user } = await checkAuth();
     console.log(contestId)
     if (!user) {
         console.error('User authentication failed.');
-        return { error: 'Authentication failed. Please log in to save your results.' };
+        return { error: 'Authentication failed. Please log in to save your results.', success: false };
     }
 
 
@@ -21,8 +21,8 @@ async function safwat({ contestId }) {
     );
 
 
-    return { result };
+    return { result, success: true };
 
 }
 
-export default safwat;
+export default join;

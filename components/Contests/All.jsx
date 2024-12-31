@@ -7,11 +7,12 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import LoadingSpinner from '@/components/loading';
-import safwat from '@/app/actions/safwat';
-
+import join from '@/app/actions/join';
+import { useRouter } from 'next/navigation';
 export default function AllContest() {
     const [upcomingPage, setUpcomingPage] = useState(1);
     const [pastPage, setPastPage] = useState(1);
+    const Router=useRouter()
     const itemsPerPage = 5;
     const { data: contestsData, isLoading, isError } = useQuery({
         queryKey: ['contests'], 
@@ -20,16 +21,24 @@ export default function AllContest() {
     const contests = contestsData?.contests || [];
 
     const handleJoinClick = async (contest) => {
-        const { result } = await safwat({ contestId: contest.$id });
-        if (result.total > 0) {
-            toast.info('You have already joined this contest.');
+        const { result,success } = await join({ contestId: contest.$id });
+        console.log(result)
+        if (success===false) {
+            toast.info('You have Login ');
+            Router.push('/login')
             return;
-        }
-        const response = await joinContestWithDetails(contest.$id); 
-        if (response.success) {
-            toast.success('Successfully joined the contest!');
-        } else {
-            toast.error(response.error || 'Failed to join contest.');
+        }else if(success===true) {
+
+            if (result.total > 0) {
+                toast.info('You have already joined this contest.');
+                return;
+            }
+            const response = await joinContestWithDetails(contest.$id); 
+            if (response.success) {
+                toast.success('Successfully joined the contest!');
+            } else {
+                toast.error(response.error || 'Failed to join contest.');
+            }
         }
     };
 

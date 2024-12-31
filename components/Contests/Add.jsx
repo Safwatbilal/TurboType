@@ -9,8 +9,12 @@ const AddContest = () => {
     const [state, formAction] = useActionState(createContest, {});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
-    const { words } = useWords(300);
+    const { words } = useWords(10000);
     useEffect(() => {
+      if (state.error) {
+        toast.error(state.error);
+        setIsSubmitting(false);
+      }
       if (state.success) {
         toast.success("Contest created successfully!");
         setIsSubmitting(true);

@@ -1,28 +1,18 @@
 'use server';
 
 import { createAdminClient } from '@/config/appwrite';
-import checkAuth from './checkAuth';
 import { ID } from 'node-appwrite';
-import { revalidatePath } from 'next/cache';
+import checkAuth from './checkAuth';
 async function createContest(previousState, formData) {
     const { databases } = await createAdminClient();
-    const { user } = await checkAuth();
-    if (!user) {
-        return { error: 'You must be logged in to create a contest' };
-    }
-
+    const { user } = await checkAuth()
     const name = formData.get('name');
     const duration = parseInt(formData.get('duration'), 10); // Ensure duration is an integer
     const dateTime = formData.get('start_date'); // Use as-is from the form input
     const words = formData.get('word')
-    if (!name || name.trim() === '') {
-        return { error: 'Contest name is required' };
-    }
-    if (!duration || isNaN(duration) || duration < 10) {
-        return { error: 'Duration must be at least 10 seconds' };
-    }
-    if (!dateTime) {
-        return { error: 'Start date and time are required' };
+
+    if (name.length > 20) {
+        return { error: 'Contest name is less 20 ch' };
     }
 
     // Parse the start_date as a Date object
