@@ -12,7 +12,7 @@ async function createContest(previousState, formData) {
     const words = formData.get('word')
 
     if (name.length > 10) {
-        return { error: 'Contest name is less 20 ch' };
+        return { error: 'Contest name is less 10 ch' };
     }
 
 
