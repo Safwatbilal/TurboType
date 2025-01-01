@@ -66,7 +66,7 @@ const Signup = () => {
             
         
               {isChecking && <LoadingSpinner  isCheck={true} />} 
-              {nameError==='not' && <FaUser className="text-red-500 text-sm" />} 
+              {nameError==='not' &&!isChecking&& <FaUser className="text-red-500 text-sm" />} 
               {nameError==='sure' && !isChecking && <FaUser className='text-green-500 text-sm' />} 
               
             </div>
